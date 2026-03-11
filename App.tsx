@@ -4,13 +4,11 @@ import { Pressable, StyleSheet, Text, View, TextInput } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import PlayerScoreButtons from "./components/PlayerScoreButtons";
+import SaveName from "./components/SaveName";
 
 export default function App() {
   const [pontuacaoJogador1, setPontuacaoJogador1] = useState(0);
   const [pontuacaoJogador2, setPontuacaoJogador2] = useState(0);
-  const [player1Name, setPlayer1Name] = useState("Player 1");
-  const [player2Name, setPlayer2Name] = useState("Player 2");
-  const [editPlayer1, setEditPlayer1] = useState(false);
 
   function adicionaPontoJogador1(ponto: number) {
     setPontuacaoJogador1((atual) => atual + ponto);
@@ -30,32 +28,7 @@ export default function App() {
         <Text style={styles.textoBranco}>Contador</Text>
       </View>
       <View style={styles.containerJogador1}>
-        {!editPlayer1 && (
-          <>
-            <Text style={styles.textoBranco}>{player1Name}</Text>
-            <Ionicons
-              name="pencil"
-              color="#fff"
-              size={24}
-              onPress={() => setEditPlayer1(true)}
-            ></Ionicons>
-          </>
-        )}
-        {editPlayer1 && (
-          <>
-            <TextInput
-              value={player1Name}
-              onChangeText={setPlayer1Name}
-              style={styles.input}
-            />
-            <Ionicons
-              name="save"
-              color="#fff"
-              size={24}
-              onPress={() => setEditPlayer1(false)}
-            ></Ionicons>
-          </>
-        )}
+        <SaveName />
 
         <Text style={[styles.pontuacao, styles.textoBranco]}>
           {pontuacaoJogador1}
@@ -64,16 +37,13 @@ export default function App() {
           addScore={adicionaPontoJogador1}
         ></PlayerScoreButtons>
       </View>
-      <Pressable>
+
+      <Pressable onPress={restart}>
         <Text style={styles.textoBranco}>Restart</Text>
       </Pressable>
+
       <View style={styles.containerJogador2}>
-        <Text style={styles.textoBranco}>{player2Name}</Text>
-        <TextInput
-          value={player2Name}
-          onChangeText={setPlayer2Name}
-          style={styles.input}
-        />
+        <SaveName />
         <Text style={[styles.pontuacao, styles.textoBranco]}>
           {pontuacaoJogador2}
         </Text>
@@ -111,13 +81,5 @@ const styles = StyleSheet.create({
   },
   textoBranco: {
     color: "#fff",
-  },
-  input: {
-    backgroundColor: "#fff",
-    borderColor: "#ff0000",
-    borderWidth: 1,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    margin: 16,
   },
 });
