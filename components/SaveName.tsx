@@ -2,15 +2,13 @@ import { StyleSheet, Text, View, TextInput } from "react-native";
 import React, { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-
-
 const SaveName = () => {
   const [name, setName] = useState("Player");
   const [isEditing, setIsEditing] = useState(false);
   return (
     <View>
       {!isEditing && (
-        <View>
+        <View style={styles.div}>
           <Text>{name}</Text>
           <Ionicons
             name="pencil"
@@ -37,6 +35,10 @@ const SaveName = () => {
 export default SaveName;
 
 const styles = StyleSheet.create({
+  div: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   input: {
     backgroundColor: "#fff",
     borderColor: "#ff0000",

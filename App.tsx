@@ -39,7 +39,10 @@ export default function App() {
       </View>
 
       <Pressable onPress={restart}>
-        <Text style={styles.textoBranco}>Restart</Text>
+        <Ionicons 
+          name="refresh"
+          color={"#fff"}
+        />
       </Pressable>
 
       <View style={styles.containerJogador2}>
